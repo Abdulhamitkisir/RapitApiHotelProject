@@ -1,0 +1,228 @@
+﻿@model RapitApiHotelProject.Models.HotelSearchViewModel.Hotel
+@{
+    ViewData["Title"] = "BookingHotelDetail";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+
+<!-- Breadcrumb Section End -->
+<!-- Hotel Details Section Begin -->
+<section class="hotel-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="hotel-title">
+                    <h2>@Model.property.name</h2>
+                    <div class="hotel-rating">
+                        <span class="rating-score">@Model.property.reviewScore / 10</span>
+                        <span class="rating-word">@Model.property.reviewScoreWord</span>
+                        <span class="review-count">@Model.property.reviewCount</span>
+                    </div>
+                    <p><i class="fa fa-map-marker"></i> @Model.property.wishlistName / @Model.property.countryCode.ToUpper()</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hotel Gallery Begin -->
+        @await Component.InvokeAsync("_DetailPhotoComponentPartial", new { hotel_id =Model.hotel_id})
+        <!-- Hotel Gallery End -->
+
+        <div class="row">
+            <!-- Hotel Info Column Begin -->
+            <div class="col-lg-8">
+                <!-- Overview Section -->
+                <div class="hotel-details-item mb-4">
+                    <div class="section-title">
+                        <h4>Overview</h4>
+                    </div>
+                    <div class="hotel-overview">
+                        <p>@Model.accessibilityLabel</p>
+                    </div>
+
+                    <!-- Facilities Section -->
+                    <div class="section-title mt-5">
+                        <h4>Hotel Facilities</h4>
+                    </div>
+                    <div class="facilities-list">
+                        <div class="row">
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Free WiFi</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Swimming Pool</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Parking</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Restaurant</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> 24/7 Reception</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Gym</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Spa</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Room Service</p>
+                            </div>
+                            <div class="col-md-4 col-6 mb-2">
+                                <p><i class="fa fa-check-circle text-success"></i> Conference Room</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Section -->
+                   
+
+                    <!-- Rooms Section -->
+                   
+
+                    <!-- Reviews Section -->
+                    
+                </div>
+            </div>
+            <!-- Hotel Info Column End -->
+            <!-- Sidebar Begin -->
+            <div class="col-lg-4">
+                <div class="hotel-sidebar">
+                    <!-- Price Box -->
+                    <div class="sidebar-item mb-4 p-4 border rounded">
+                        <h4>Price Details</h4>
+                        <div class="price-box mt-3">
+                            
+                            <div class="current-price">
+                                <h3 class="mb-0">@Model.property.priceBreakdown.grossPrice.value @Model.property.priceBreakdown.grossPrice.currency</h3>
+                                <p class="text-muted"><small>Total Price</small></p>
+                            </div>
+
+                           
+
+                            <a href="#" class="btn btn-success">Book Now</a>
+                            <p class="text-center text-muted mt-2"><small>No prepayment needed</small></p>
+                        </div>
+                    </div>
+
+                    <!-- Check-in/out Info -->
+                    <div class="sidebar-item mb-4 p-4 border rounded">
+                        <h4>Stay Information</h4>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <td><i class="fa fa-calendar-check-o"></i> Check-in:</td>
+                                    <td>@Model.property.checkin.fromTime - @Model.property.checkin.untilTime</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-calendar-times-o"></i> Check-out:</td>
+                                    <td>@Model.property.checkout.fromTime - @Model.property.checkout.untilTime</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-credit-card"></i> Accepted payments:</td>
+                                    <td>
+                                        <i class="fa fa-cc-visa" title="Visa"></i>
+                                        <i class="fa fa-cc-mastercard" title="Mastercard"></i>
+                                        <i class="fa fa-cc-amex" title="American Express"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="sidebar-item mb-4 p-4 border rounded">
+                        <h4>Contact Information</h4>
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2"><i class="fa fa-phone"></i> +90 212 123 4567</li>
+                            <li class="mb-2"><i class="fa fa-envelope"></i> info@hotelname.com</li>
+                            <li><i class="fa fa-globe"></i> <a href="#" target="_blank">Visit hotel website</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Policies -->
+                    <div class="sidebar-item mb-4 p-4 border rounded">
+                        <h4>Hotel Policies</h4>
+                        <div class="policy-list mt-3">
+                            <div class="policy-item mb-3">
+                                <h5>Cancellation</h5>
+                                <p>Free cancellation up to 48 hours before check-in. Cancellations made less than 48 hours before check-in are subject to a one-night charge.</p>
+                            </div>
+                            <div class="policy-item mb-3">
+                                <h5>Children & Beds</h5>
+                                <p>Children of all ages are welcome. Children 12 and above are considered adults. Extra beds available for an additional charge.</p>
+                            </div>
+                            <div class="policy-item">
+                                <h5>Pets</h5>
+                                <p>Pets are not allowed on the property.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar End -->
+        </div>
+    </div>
+</section>
+<!-- Hotel Details Section End -->
+<!-- Photo Gallery Modal -->
+
+<!-- Custom CSS for this page -->
+<style>
+    .hotel-title {
+        margin-bottom: 30px;
+    }
+
+    .hotel-rating {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .rating-score {
+        background-color: #5392f9;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .rating-word {
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    .hotel-main-image {
+        height: 400px;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+        .hotel-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .thumbnail {
+        height: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .section-title {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    .overall-score {
+        border-radius: 10px;
+    }
+
+    .review-item:last-child {
+        border-bottom: none !important;
+    }
+</style>

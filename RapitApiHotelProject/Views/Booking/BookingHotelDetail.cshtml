@@ -1,0 +1,489 @@
+﻿@model List<RapitApiHotelProject.Models.HotelDetailViewModel.Data>
+@{
+    ViewData["Title"] = "BookingHotelDetail";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<!-- Breadcrumb Section Begin -->
+@foreach (var item in Model)
+{
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>Hotel Detail</h2>
+                        <div class="bt-option">
+                            <a href="/">Home</a>
+                            <a href="/search">Search Results</a>
+                            <span>@item.hotel_name</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section End -->
+    <!-- Hotel Details Section Begin -->
+    <section class="hotel-details-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="hotel-title">
+                        <h2>@item.hotel_name</h2>
+                        <div class="hotel-rating">
+                            <span class="rating-score">@item.rawData.reviewScore / 10</span>
+                            <span class="rating-word">@item.rawData.reviewScoreWord</span>
+                            <span class="review-count">(@item.rawData.reviewCount)</span>
+                        </div>
+                        <p><i class="fa fa-map-marker"></i>@item.city_name_en,@item.country_trans</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hotel Gallery Begin -->
+         @*    @await Component.InvokeAsync("_DetailPhotoComponentPartial", new { hotel_id = item.hotel_id }) *@
+            <!-- Hotel Gallery End -->
+
+            <div class="row">
+                <!-- Hotel Info Column Begin -->
+                <div class="col-lg-8">
+                    <!-- Overview Section -->
+                    <div class="hotel-details-item mb-4">
+                        <div class="section-title">
+                            <h4>Overview</h4>
+                        </div>
+                        <div class="hotel-overview">
+                            <p>Located in the heart of the city, this hotel offers luxurious accommodations with stunning views. The hotel is within walking distance to major attractions, shopping centers, and dining options. Guests can enjoy free high-speed Wi-Fi, on-site parking, and a complimentary breakfast buffet during their stay.</p>
+                        </div>
+
+                        <!-- Facilities Section -->
+                        <div class="section-title mt-5">
+                            <h4>Hotel Facilities</h4>
+                        </div>
+                        <div class="facilities-list">
+                            <div class="row">
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Free WiFi</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Swimming Pool</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Parking</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Restaurant</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> 24/7 Reception</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Gym</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Spa</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Room Service</p>
+                                </div>
+                                <div class="col-md-4 col-6 mb-2">
+                                    <p><i class="fa fa-check-circle text-success"></i> Conference Room</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Location Section -->
+                        <div class="section-title mt-5">
+                            <h4>Location & Surroundings</h4>
+                        </div>
+                        <div class="location-details">
+                            <p>
+                                <i class="fa fa-map-marker"></i> 123 Main Street, Istanbul, 34000, Turkey
+                            </p>
+
+                            <div class="hotel-map mt-3">
+                                <iframe width="100%"
+                                        height="300"
+                                        frameborder="0"
+                                        scrolling="no"
+                                        marginheight="0"
+                                        marginwidth="0"
+                                        src="https://maps.google.com/maps?q=41.0082,28.9784&hl=en&z=15&output=embed">
+                                </iframe>
+                            </div>
+
+                            <div class="landmarks mt-3">
+                                <h5>Nearby Landmarks</h5>
+                                <ul class="list-unstyled">
+                                    <li><i class="fa fa-map-pin"></i> City Center - 0.5 km</li>
+                                    <li><i class="fa fa-map-pin"></i> Shopping Mall - 1.2 km</li>
+                                    <li><i class="fa fa-map-pin"></i> Blue Mosque - 2.3 km</li>
+                                    <li><i class="fa fa-map-pin"></i> Airport - 15.7 km</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Rooms Section -->
+                        <div class="section-title mt-5">
+                            <h4>Available Rooms</h4>
+                        </div>
+                        <div class="available-rooms">
+                            <div class="room-option mb-4 p-3 border rounded">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="/img/room-1.jpg" alt="Standard Room" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h5>Standard Room</h5>
+                                        <p class="room-description">Comfortable room with city view, one queen bed, and modern amenities.</p>
+
+                                        <div class="room-features">
+                                            <span class="badge badge-info mr-2"><i class="fa fa-user"></i> Sleeps 2</span>
+                                            <span class="badge badge-info mr-2"><i class="fa fa-bed"></i> 1 Queen Bed</span>
+                                            <span class="badge badge-info mr-2"><i class="fa fa-expand"></i> 25 m²</span>
+                                        </div>
+
+                                        <div class="room-amenities mt-2">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Air conditioning</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Free WiFi</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Flat-screen TV</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Private bathroom</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Mini bar</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Safe</small>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="small">Show all amenities (12)</a>
+                                        </div>
+
+                                        <div class="room-price-box mt-3 text-right">
+                                            <p class="room-price">
+                                                <span class="price">120 €</span>
+                                                <small class="text-muted d-block">per night</small>
+                                            </p>
+                                            <a href="#" class="primary-btn">Book Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="room-option mb-4 p-3 border rounded">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="/img/room-2.jpg" alt="Deluxe Room" class="img-fluid">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <h5>Deluxe Room</h5>
+                                        <p class="room-description">Spacious room with sea view, king-size bed, and premium amenities.</p>
+
+                                        <div class="room-features">
+                                            <span class="badge badge-info mr-2"><i class="fa fa-user"></i> Sleeps 3</span>
+                                            <span class="badge badge-info mr-2"><i class="fa fa-bed"></i> 1 King Bed</span>
+                                            <span class="badge badge-info mr-2"><i class="fa fa-expand"></i> 35 m²</span>
+                                        </div>
+
+                                        <div class="room-amenities mt-2">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Air conditioning</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Free WiFi</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Flat-screen TV</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Private bathroom</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Bathtub</small>
+                                                </div>
+                                                <div class="col-6">
+                                                    <small><i class="fa fa-check text-success"></i> Balcony</small>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="small">Show all amenities (15)</a>
+                                        </div>
+
+                                        <div class="room-price-box mt-3 text-right">
+                                            <p class="room-price">
+                                                <span class="price">180 €</span>
+                                                <small class="text-muted d-block">per night</small>
+                                            </p>
+                                            <a href="#" class="primary-btn">Book Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reviews Section -->
+                        <div class="section-title mt-5">
+                            <h4>Guest Reviews</h4>
+                        </div>
+                        <div class="guest-reviews">
+                            <div class="review-summary mb-4">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 text-center">
+                                        <div class="overall-score p-3 rounded bg-primary text-white">
+                                            <h2 class="mb-0">8.5</h2>
+                                            <p class="mb-0">Very Good</p>
+                                            <small>Based on 235 reviews</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="score-breakdown">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>Cleanliness</span>
+                                                <div class="progress flex-grow-1 mx-3" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 90%"></div>
+                                                </div>
+                                                <span>9.0</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>Comfort</span>
+                                                <div class="progress flex-grow-1 mx-3" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+                                                </div>
+                                                <span>8.5</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>Staff</span>
+                                                <div class="progress flex-grow-1 mx-3" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 92%"></div>
+                                                </div>
+                                                <span>9.2</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>Value for money</span>
+                                                <div class="progress flex-grow-1 mx-3" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 78%"></div>
+                                                </div>
+                                                <span>7.8</span>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <span>Location</span>
+                                                <div class="progress flex-grow-1 mx-3" style="height: 8px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: 88%"></div>
+                                                </div>
+                                                <span>8.8</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review-list">
+                                <div class="review-item mb-4 p-3 border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="reviewer-info">
+                                            <h5>John Smith</h5>
+                                            <p class="text-muted">
+                                                <small>
+                                                    <i class="fa fa-map-marker"></i> United States &bull;
+                                                    <i class="fa fa-calendar"></i> 15 Feb 2025 &bull;
+                                                    <i class="fa fa-bed"></i> Deluxe Room
+                                                </small>
+                                            </p>
+                                        </div>
+                                        <div class="review-score">
+                                            <span class="badge badge-primary p-2">9.2</span>
+                                        </div>
+                                    </div>
+                                    <div class="review-content mt-2">
+                                        <p>Excellent location and very friendly staff. The room was clean and comfortable. Breakfast was amazing with lots of options. Would definitely stay here again on my next visit.</p>
+                                    </div>
+                                </div>
+
+                                <div class="review-item mb-4 p-3 border-bottom">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="reviewer-info">
+                                            <h5>Maria Garcia</h5>
+                                            <p class="text-muted">
+                                                <small>
+                                                    <i class="fa fa-map-marker"></i> Spain &bull;
+                                                    <i class="fa fa-calendar"></i> 3 Feb 2025 &bull;
+                                                    <i class="fa fa-bed"></i> Standard Room
+                                                </small>
+                                            </p>
+                                        </div>
+                                        <div class="review-score">
+                                            <span class="badge badge-primary p-2">8.0</span>
+                                        </div>
+                                    </div>
+                                    <div class="review-content mt-2">
+                                        <p>Good value for money. The location is perfect, close to many attractions. The room was a bit small but clean and comfortable. The staff was helpful and breakfast was good.</p>
+                                    </div>
+                                </div>
+
+                                <div class="text-center mt-4">
+                                    <a href="#" class="btn btn-outline-primary">See All Reviews</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hotel Info Column End -->
+                <!-- Sidebar Begin -->
+                <div class="col-lg-4">
+                    <div class="hotel-sidebar">
+                        <!-- Price Box -->
+                        <div class="sidebar-item mb-4 p-4 border rounded">
+                            <h4>Price Details</h4>
+                            <div class="price-box mt-3">
+                                <div class="original-price mb-2">
+                                    <p class="text-muted">
+                                        <s>150 €</s>
+                                    </p>
+                                </div>
+                                <div class="current-price">
+                                    <h3 class="mb-0">120 €</h3>
+                                    <p class="text-muted"><small>per night</small></p>
+                                </div>
+
+                                <div class="discount-info alert alert-success mt-2">
+                                    <p class="mb-0">
+                                        <i class="fa fa-tag"></i> Save 30 € (20%)
+                                    </p>
+                                </div>
+
+                                <a href="#" class="primary-btn w-100 mt-3">Book Now</a>
+                                <p class="text-center text-muted mt-2"><small>No prepayment needed</small></p>
+                            </div>
+                        </div>
+
+                        <!-- Check-in/out Info -->
+                        <div class="sidebar-item mb-4 p-4 border rounded">
+                            <h4>Stay Information</h4>
+                            <table class="table table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fa fa-calendar-check-o"></i> Check-in:</td>
+                                        <td>14:00 - 00:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-calendar-times-o"></i> Check-out:</td>
+                                        <td>07:00 - 11:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-credit-card"></i> Accepted payments:</td>
+                                        <td>
+                                            <i class="fa fa-cc-visa" title="Visa"></i>
+                                            <i class="fa fa-cc-mastercard" title="Mastercard"></i>
+                                            <i class="fa fa-cc-amex" title="American Express"></i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="sidebar-item mb-4 p-4 border rounded">
+                            <h4>Contact Information</h4>
+                            <ul class="list-unstyled mt-3">
+                                <li class="mb-2"><i class="fa fa-phone"></i> +90 212 123 4567</li>
+                                <li class="mb-2"><i class="fa fa-envelope"></i> info@hotelname.com</li>
+                                <li><i class="fa fa-globe"></i> <a href="#" target="_blank">Visit hotel website</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Policies -->
+                        <div class="sidebar-item mb-4 p-4 border rounded">
+                            <h4>Hotel Policies</h4>
+                            <div class="policy-list mt-3">
+                                <div class="policy-item mb-3">
+                                    <h5>Cancellation</h5>
+                                    <p>Free cancellation up to 48 hours before check-in. Cancellations made less than 48 hours before check-in are subject to a one-night charge.</p>
+                                </div>
+                                <div class="policy-item mb-3">
+                                    <h5>Children & Beds</h5>
+                                    <p>Children of all ages are welcome. Children 12 and above are considered adults. Extra beds available for an additional charge.</p>
+                                </div>
+                                <div class="policy-item">
+                                    <h5>Pets</h5>
+                                    <p>Pets are not allowed on the property.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar End -->
+            </div>
+        </div>
+    </section>
+    <!-- Hotel Details Section End -->
+    <!-- Photo Gallery Modal -->
+}
+
+
+
+<!-- Custom CSS for this page -->
+<style>
+    .hotel-title {
+        margin-bottom: 30px;
+    }
+
+    .hotel-rating {
+        display: inline-block;
+        margin-left: 15px;
+    }
+
+    .rating-score {
+        background-color: #5392f9;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .rating-word {
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    .hotel-main-image {
+        height: 400px;
+        overflow: hidden;
+        border-radius: 5px;
+    }
+
+        .hotel-main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .thumbnail {
+        height: 120px;
+        object-fit: cover;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .section-title {
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+
+    .overall-score {
+        border-radius: 10px;
+    }
+
+    .review-item:last-child {
+        border-bottom: none !important;
+    }
+</style>
