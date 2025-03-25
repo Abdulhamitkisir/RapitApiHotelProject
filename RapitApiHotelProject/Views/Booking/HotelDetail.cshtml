@@ -1,6 +1,6 @@
-﻿@model RapitApiHotelProject.Models.HotelSearchViewModel.Hotel
+﻿@model RapitApiHotelProject.Models.HotelDetailViewModel.Data
 @{
-    ViewData["Title"] = "BookingHotelDetail";
+    ViewData["Title"] = "HotelDetail";
     Layout = "~/Views/Layout/Index.cshtml";
 }
 
@@ -8,24 +8,25 @@
 
 <!-- Breadcrumb Section End -->
 <!-- Hotel Details Section Begin -->
-<section class="hotel-details-section spad">
+
+    <section class="hotel-details-section spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="hotel-title">
-                    <h2>@Model.property.name</h2>
+                    <h2>@Model.hotel_name</h2>
                     <div class="hotel-rating">
-                        <span class="rating-score">@Model.property.reviewScore / 10</span>
-                        <span class="rating-word">@Model.property.reviewScoreWord</span>
-                        <span class="review-count">@Model.property.reviewCount</span>
+                        <span class="rating-score"> @Model.rawData.reviewScore /10 </span>
+                        <span class="rating-word">@Model.rawData.reviewScoreWord</span>
+                        <span class="review-count">@Model.rawData.reviewCount </span>
                     </div>
-                    <p><i class="fa fa-map-marker"></i> @Model.property.wishlistName / @Model.property.countryCode.ToUpper()</p>
+                    <p><i class="fa fa-map-marker"></i>@Model.rawData.wishlistName  / @Model.rawData.countryCode.ToUpper() </p>
                 </div>
             </div>
         </div>
 
         <!-- Hotel Gallery Begin -->
-        @await Component.InvokeAsync("_DetailPhotoComponentPartial", new { hotel_id =Model.hotel_id})
+        @await Component.InvokeAsync("_DetailPhotoComponentPartial", new { hotel_id = Model.hotel_id })
         <!-- Hotel Gallery End -->
 
         <div class="row">
@@ -36,9 +37,30 @@
                     <div class="section-title">
                         <h4>Overview</h4>
                     </div>
-                    <div class="hotel-overview">
-                        <p>@Model.accessibilityLabel</p>
-                    </div>
+                    @foreach (var item in Model.hotel_important_information_with_codes)
+                    {
+                        @if (string.IsNullOrEmpty(item.phrase))
+                        {
+                            <div class="hotel-overview">
+                                <p>No Information Data From API</p>
+                            </div>
+                            <br />
+                        }
+                        else
+                        {
+                            <div class="hotel-overview">
+                                <p>@item.phrase</p>
+                            </div>
+                            <br />
+                        }
+                       
+                    }
+
+                    
+
+                   @*  <div class="hotel-overview">
+                        <p>@Model.</p>
+                    </div> *@
 
                     <!-- Facilities Section -->
                     <div class="section-title mt-5">
@@ -46,10 +68,22 @@
                     </div>
                     <div class="facilities-list">
                         <div class="row">
-                            <div class="col-md-4 col-6 mb-2">
-                                <p><i class="fa fa-check-circle text-success"></i> Free WiFi</p>
-                            </div>
-                            <div class="col-md-4 col-6 mb-2">
+                            @foreach (var item in Model.facilities_block.facilities)
+                            {
+                                <div class="col-md-4 col-6 mb-2">
+                                    @if (string.IsNullOrEmpty(item.name))
+                                    {
+                                        <p><i class="fa fa-check-circle text-success"></i> No facilities data</p>
+                                    }
+                                    else
+                                    {
+                                        <p><i class="fa fa-check-circle text-success"></i> @item.name</p>
+                                    }
+                                   
+                                </div>
+                            }
+                            
+                        @*     <div class="col-md-4 col-6 mb-2">
                                 <p><i class="fa fa-check-circle text-success"></i> Swimming Pool</p>
                             </div>
                             <div class="col-md-4 col-6 mb-2">
@@ -72,7 +106,7 @@
                             </div>
                             <div class="col-md-4 col-6 mb-2">
                                 <p><i class="fa fa-check-circle text-success"></i> Conference Room</p>
-                            </div>
+                            </div> *@
                         </div>
                     </div>
 
@@ -96,7 +130,7 @@
                         <div class="price-box mt-3">
                             
                             <div class="current-price">
-                                <h3 class="mb-0">@Model.property.priceBreakdown.grossPrice.value @Model.property.priceBreakdown.grossPrice.currency</h3>
+                                <h3 class="mb-0">@Model.rawData.priceBreakdown.grossPrice.value @Model.rawData.priceBreakdown.grossPrice.currency</h3>
                                 <p class="text-muted"><small>Total Price</small></p>
                             </div>
 
@@ -114,20 +148,13 @@
                             <tbody>
                                 <tr>
                                     <td><i class="fa fa-calendar-check-o"></i> Check-in:</td>
-                                    <td>@Model.property.checkin.fromTime - @Model.property.checkin.untilTime</td>
+                                    <td>@Model.rawData.checkin.fromTime - @Model.rawData.checkin.untilTime</td>
                                 </tr>
                                 <tr>
                                     <td><i class="fa fa-calendar-times-o"></i> Check-out:</td>
-                                    <td>@Model.property.checkout.fromTime - @Model.property.checkout.untilTime</td>
+                                    <td>@Model.rawData.checkout.fromTime - @Model.rawData.checkout.untilTime</td>
                                 </tr>
-                                <tr>
-                                    <td><i class="fa fa-credit-card"></i> Accepted payments:</td>
-                                    <td>
-                                        <i class="fa fa-cc-visa" title="Visa"></i>
-                                        <i class="fa fa-cc-mastercard" title="Mastercard"></i>
-                                        <i class="fa fa-cc-amex" title="American Express"></i>
-                                    </td>
-                                </tr>
+                              
                             </tbody>
                         </table>
                     </div>
@@ -136,14 +163,13 @@
                     <div class="sidebar-item mb-4 p-4 border rounded">
                         <h4>Contact Information</h4>
                         <ul class="list-unstyled mt-3">
-                            <li class="mb-2"><i class="fa fa-phone"></i> +90 212 123 4567</li>
-                            <li class="mb-2"><i class="fa fa-envelope"></i> info@hotelname.com</li>
-                            <li><i class="fa fa-globe"></i> <a href="#" target="_blank">Visit hotel website</a></li>
+                            <li class="mb-2"><i class="fa fa-address-card"></i><br /> @Model.address<br />@Model.zip<br />@Model.city_name_en<br />@Model.country_trans</li>                           
+                            <li><i class="fa fa-globe"></i> <a href="@Model.url" target="_blank">Visit hotel website</a></li>
                         </ul>
                     </div>
 
                     <!-- Policies -->
-                    <div class="sidebar-item mb-4 p-4 border rounded">
+              @*       <div class="sidebar-item mb-4 p-4 border rounded">
                         <h4>Hotel Policies</h4>
                         <div class="policy-list mt-3">
                             <div class="policy-item mb-3">
@@ -159,13 +185,15 @@
                                 <p>Pets are not allowed on the property.</p>
                             </div>
                         </div>
-                    </div>
+                    </div> *@
                 </div>
             </div>
             <!-- Sidebar End -->
         </div>
     </div>
-</section>
+</section>  
+
+
 <!-- Hotel Details Section End -->
 <!-- Photo Gallery Modal -->
 

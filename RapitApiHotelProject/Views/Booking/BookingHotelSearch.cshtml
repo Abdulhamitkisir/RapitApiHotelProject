@@ -55,12 +55,13 @@
                                     
                                 </tbody>
                             </table>
-                            <a href="@Url.Action("BookingHotelDetail", "Booking", new { hotelId  = item.hotel_id ,
+                          @*   <a href="@Url.Action("BookingHotelDetail", "Booking", new { hotelId  = item.hotel_id ,
                                     checkin=item.property.checkinDate,
                                     checkout=item.property.checkoutDate                                    
                                     })" class="primary-btn">
                                 Hotel detail
-                            </a>
+                            </a> *@
+                            <a href="@Url.Action("HotelDetail", "Booking", new { hotel_id = item.hotel_id, arrival_date = item.property.checkinDate, departure_date = item.property.checkoutDate})" class="btn btn-primary">Detayları Gör</a>
                         </div>
                     </div>
                 </div>

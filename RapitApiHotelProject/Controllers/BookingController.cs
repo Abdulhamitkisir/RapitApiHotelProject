@@ -77,39 +77,47 @@ namespace RapitApiHotelProject.Controllers
                 var apiRenponse = JsonConvert.DeserializeObject<HotelSearchViewModel>(body);
                 var hotels = apiRenponse?.data?.hotels.ToList() ?? new List<HotelSearchViewModel.Hotel>();
 
-                
 
                 return View(hotels);
             }
 
         }
 
-        public async Task<IActionResult> BookingHotelDetail(int hotelId, string checkin, string checkout)
+        public async Task<IActionResult> HotelDetail(string hotel_id, string arrival_date, string departure_date)
         {
+            if (string.IsNullOrEmpty(hotel_id) || string.IsNullOrEmpty(arrival_date) || string.IsNullOrEmpty(departure_date))
+            {
+                return BadRequest("Geçersiz otel bilgileri");
+            }
+
             var client = new HttpClient();
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id={hotelId}&arrival_date={checkin}&departure_date={checkout}&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR"),
+                RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id={hotel_id}&arrival_date={arrival_date}&departure_date={departure_date}&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR"),
                 Headers =
-    {
-        { "x-rapidapi-key", "e900edeca4msh1ac2d78844ebe8ep175aafjsnb5be1dd3a0a6" },
-        { "x-rapidapi-host", "booking-com15.p.rapidapi.com" },
-    },
+        {
+            { "x-rapidapi-key", "e900edeca4msh1ac2d78844ebe8ep175aafjsnb5be1dd3a0a6" },
+            { "x-rapidapi-host", "booking-com15.p.rapidapi.com" },
+        },
             };
+
             using (var response = await client.SendAsync(request))
             {
                 response.EnsureSuccessStatusCode();
                 var body = await response.Content.ReadAsStringAsync();
+                var hotelDetail = JsonConvert.DeserializeObject<HotelDetailViewModel>(body);
+                //var detail = new HotelDetailViewModel.Data();
 
-                var apiResponse=JsonConvert.DeserializeObject<HotelDetailViewModel>(body);
+                // hotel_id değerini view'a geçirmek için
+                ViewBag.HotelId = hotel_id;
 
-                var hotelDetails = apiResponse?.datas?.ToList() ?? new List<HotelDetailViewModel.Data>();
 
-                return View(apiResponse);
-                //3920317 vien id
+
+                return View(hotelDetail.Datas);
             }
-
         }
+
     }
 }
+
