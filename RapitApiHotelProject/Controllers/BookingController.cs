@@ -30,7 +30,7 @@ namespace RapitApiHotelProject.Controllers
                 RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/hotels/searchDestination?query={location}"),
                 Headers =
     {
-        { "x-rapidapi-key", "e900edeca4msh1ac2d78844ebe8ep175aafjsnb5be1dd3a0a6" },
+        { "x-rapidapi-key", "YourKey" },
         { "x-rapidapi-host", "booking-com15.p.rapidapi.com" },
     },
             };
@@ -65,7 +65,7 @@ namespace RapitApiHotelProject.Controllers
                 RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/hotels/searchHotels?dest_id={destId}&search_type=CITY&arrival_date={checkin}&departure_date={checkout}&adults={adult}&children_age={child}&room_qty=1&page_number=1&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR"),
                 Headers =
     {
-        { "x-rapidapi-key", "e900edeca4msh1ac2d78844ebe8ep175aafjsnb5be1dd3a0a6" },
+        { "x-rapidapi-key", "YourKey" },
         { "x-rapidapi-host", "booking-com15.p.rapidapi.com" },
     },
             };
@@ -97,7 +97,7 @@ namespace RapitApiHotelProject.Controllers
                 RequestUri = new Uri($"https://booking-com15.p.rapidapi.com/api/v1/hotels/getHotelDetails?hotel_id={hotel_id}&arrival_date={arrival_date}&departure_date={departure_date}&units=metric&temperature_unit=c&languagecode=en-us&currency_code=EUR"),
                 Headers =
         {
-            { "x-rapidapi-key", "e900edeca4msh1ac2d78844ebe8ep175aafjsnb5be1dd3a0a6" },
+            { "x-rapidapi-key", "YourKey" },
             { "x-rapidapi-host", "booking-com15.p.rapidapi.com" },
         },
             };
